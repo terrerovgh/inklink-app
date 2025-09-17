@@ -1,0 +1,319 @@
+/* Estilos responsivos para el mapa */
+
+/* Contenedor base del mapa */
+.map-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+  .map-container {
+    height: 100vh;
+    height: 100dvh; /* Soporte para viewport dinámico */
+  }
+  
+  /* Controles del mapa en móvil */
+  .map-controls {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .map-controls button {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    touch-action: manipulation;
+    user-select: none;
+  }
+  
+  .map-controls button:active {
+    transform: scale(0.95);
+    background: rgba(255, 255, 255, 0.8);
+  }
+  
+  /* Filtros en móvil */
+  .map-filters {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Selector de capas en móvil */
+  .layer-selector {
+    position: absolute;
+    top: 80px;
+    left: 20px;
+    z-index: 1000;
+  }
+  
+  .layer-selector-button {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
+  }
+}
+
+/* Estilos para tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .map-controls {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+  
+  .map-filters {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    max-width: 300px;
+  }
+  
+  .layer-selector {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+  }
+}
+
+/* Estilos para desktop */
+@media (min-width: 1025px) {
+  .map-controls {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+  
+  .map-filters {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    max-width: 350px;
+  }
+  
+  .layer-selector {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+  }
+}
+
+/* Estilos para orientación landscape en móvil */
+@media (max-width: 768px) and (orientation: landscape) {
+  .map-container {
+    height: 100vh;
+    height: 100dvh;
+  }
+  
+  .map-filters {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    padding: 8px;
+  }
+  
+  .map-controls {
+    bottom: 10px;
+    right: 10px;
+  }
+  
+  .layer-selector {
+    top: 60px;
+    left: 10px;
+  }
+}
+
+/* Estilos para dispositivos con notch */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .map-container {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Optimizaciones para touch */
+.leaflet-container {
+  touch-action: pan-x pan-y;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.leaflet-control-container {
+  pointer-events: none;
+}
+
+.leaflet-control {
+  pointer-events: auto;
+}
+
+/* Mejoras para zoom táctil */
+.leaflet-touch .leaflet-control-zoom-in,
+.leaflet-touch .leaflet-control-zoom-out {
+  width: 44px;
+  height: 44px;
+  line-height: 42px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Optimización para arrastre suave */
+.leaflet-dragging .leaflet-container {
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+}
+
+/* Prevenir selección de texto durante interacciones */
+.leaflet-container,
+.leaflet-container * {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+/* Mejoras para marcadores en móvil */
+@media (max-width: 768px) {
+  .leaflet-marker-icon {
+    transform-origin: center bottom;
+  }
+  
+  .leaflet-popup {
+    margin-bottom: 20px;
+  }
+  
+  .leaflet-popup-content-wrapper {
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .leaflet-popup-content {
+    margin: 16px;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+}
+
+/* Animaciones suaves */
+.map-controls button,
+.layer-selector-button {
+  transition: all 0.2s ease;
+}
+
+.map-filters {
+  transition: all 0.3s ease;
+}
+
+/* Estados de carga */
+.map-loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(5px);
+}
+
+.map-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Modo oscuro */
+@media (prefers-color-scheme: dark) {
+  .map-controls button {
+    background: rgba(30, 30, 30, 0.95);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .map-filters {
+    background: rgba(30, 30, 30, 0.95);
+    color: #fff;
+  }
+  
+  .layer-selector-button {
+    background: rgba(30, 30, 30, 0.95);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .map-loading-overlay {
+    background: rgba(30, 30, 30, 0.9);
+  }
+}
+
+/* Accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  .map-controls button,
+  .layer-selector-button,
+  .map-filters {
+    transition: none;
+  }
+  
+  .map-loading-spinner {
+    animation: none;
+  }
+}
+
+/* Focus visible para navegación por teclado */
+.map-controls button:focus-visible,
+.layer-selector-button:focus-visible {
+  outline: 2px solid #3498db;
+  outline-offset: 2px;
+}
